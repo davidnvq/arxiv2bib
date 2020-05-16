@@ -1,0 +1,9 @@
+README.rst
+arxiv.py
+setup.cfg
+setup.py
+arxiv.egg-info/PKG-INFO
+arxiv.egg-info/SOURCES.txt
+arxiv.egg-info/dependency_links.txt
+arxiv.egg-info/entry_points.txt
+arxiv.egg-info/top_level.txt

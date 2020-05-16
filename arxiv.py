@@ -1,40 +1,3 @@
-#! /usr/bin/env python
-#
-# Copyright (c) 2012, Nathan Grigg
-# All rights reserved.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-#
-# * Redistributions of source code must retain the above copyright
-#   notice, this list of conditions and the following disclaimer.
-# * Redistributions in binary form must reproduce the above copyright
-#   notice, this list of conditions and the following disclaimer in the
-#   documentation and/or other materials provided with the distribution.
-# * Neither the name of this package nor the
-#   names of its contributors may be used to endorse or promote products
-#   derived from this software without specific prior written permission.
-#
-# This software is provided by the copyright holders and contributors "as
-# is" and any express or implied warranties, including, but not limited
-# to, the implied warranties of merchantability and fitness for a
-# particular purpose are disclaimed. In no event shall Nathan Grigg be
-# liable for any direct, indirect, incidental, special, exemplary, or
-# consequential damages (including, but not limited to, procurement of
-# substitute goods or services; loss of use, data, or profits; or business
-# interruption) however caused and on any theory of liability, whether in
-# contract, strict liability, or tort (including negligence or otherwise)
-# arising in any way out of the use of this software, even if advised of
-# the possibility of such damage.
-#
-# (also known as the New BSD License)
-#
-# Indiscriminate automated downloads from arXiv.org are not permitted.
-# For more information, see http://arxiv.org/help/robots
-#
-# This script usually makes only one call to arxiv.org per run.
-# No caching of any kind is performed.
-
 from __future__ import print_function
 from xml.etree import ElementTree
 import sys
@@ -288,6 +251,13 @@ def arxiv2bib_dict(id_list):
 
     return d
 
+def get_arxiv_id(text):
+    """
+    text = http://arxiv.org/abs/2005.00743v1
+    return = 2005.00743
+    """
+    format_id = re.compile('[\\d]+.[\\d]+')
+    return format_id.findall(text)[0]
 
 class Cli(object):
     """Command line interface"""
@@ -299,6 +269,10 @@ class Cli(object):
         if len(self.args.id) == 0:
             self.args.id = [line.strip() for line in sys.stdin]
 
+        self.args.id = [get_arxiv_id(line) for line in self.args.id]
+        #print("arxiv_id", self.args.id)
+
+            
         # avoid duplicate error messages unless verbose is set
         if self.args.comments and not self.args.verbose:
             self.args.quiet = True
@@ -311,6 +285,7 @@ class Cli(object):
     def run(self):
         """Produce output and error messages"""
         try:
+            print("Run!!!!")
             bib = arxiv2bib(self.args.id)
         except HTTPError as error:
             if error.getcode() == 403:
