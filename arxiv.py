@@ -137,19 +137,25 @@ class Reference(object):
     def bibtex(self):
         """BibTex string of the reference."""
 
-        lines = ["@article{" + self.id]
-        for k, v in [("Author", " and ".join(self.authors)),
-                    ("Title", self.title),
-                    ("Eprint", self.id),
-                    ("DOI", self.doi),
-                    ("ArchivePrefix", "arXiv"),
-                    ("PrimaryClass", self.category),
-                    ("Abstract", self.summary),
-                    ("Year", self.year),
-                    ("Month", self.month),
-                    ("Note", self.note),
-                    ("Url", self.url),
-                    ("File", self.id + ".pdf"),
+        article = self.authors[0].split(' ')[-1]
+        article += str(self.year)
+        article += self.title.split(' ')[0]
+        article = article.replace(":", "").lower()
+        lines = ["@article{" + article]
+
+        for k, v in [("author", " and ".join(self.authors)),
+                    ("title", self.title),
+                    # ("Eprint", self.id),
+                    # ("DOI", self.doi),
+                    # ("ArchivePrefix", "arXiv"),
+                    # ("PrimaryClass", self.category),
+                    ("abstract", self.summary),
+                    ("journal", f"arXiv preprint arXiv:{self.id}"),
+                    ("year", self.year),
+                    ("month", self.month),
+                    ("note", self.note),
+                    ("url", self.url),
+                    ("file", self.id + ".pdf"),
                     ]:
             if len(v):
                 lines.append("%-13s = {%s}" % (k, v))
@@ -258,6 +264,7 @@ def get_arxiv_id(text):
     """
     format_id = re.compile('[\\d]+.[\\d]+')
     return format_id.findall(text)[0]
+
 
 class Cli(object):
     """Command line interface"""
