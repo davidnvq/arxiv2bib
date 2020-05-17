@@ -13,21 +13,6 @@ Description: Provides a command line tool to get metadata for an academic paper
         
             $ arxiv2bib 1001.1001
         
-        Into this::
-        
-            @article{1001.1001v1,
-            Author        = {Philip G. Judge},
-            Title         = {The chromosphere: gateway to the corona,
-              or the purgatory of solar physics?},
-            Eprint        = {1001.1001v1},
-            ArchivePrefix = {arXiv},
-            PrimaryClass  = {astro-ph.SR},
-            Abstract      = {I outline curious observations which I personally
-            find puzzling and deserving of attention.},
-            Year          = {2010},
-            Month         = {Jan}
-            }
-        
 Keywords: arxiv,bibtex,latex,citation
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 2

@@ -1,3 +1,3 @@
 [console_scripts]
-arxiv = arxiv:main
+arxiv2bib = arxiv2bib:main
 

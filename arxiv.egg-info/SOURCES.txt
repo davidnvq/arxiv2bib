@@ -1,6 +1,4 @@
-README.rst
-arxiv.py
-setup.cfg
+arxiv2bib.py
 setup.py
 arxiv.egg-info/PKG-INFO
 arxiv.egg-info/SOURCES.txt

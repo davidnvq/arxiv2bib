@@ -149,7 +149,7 @@ class Reference(object):
                     # ("DOI", self.doi),
                     # ("ArchivePrefix", "arXiv"),
                     # ("PrimaryClass", self.category),
-                    ("abstract", self.summary),
+                    # ("abstract", self.summary),
                     ("journal", f"arXiv preprint arXiv:{self.id}"),
                     ("year", self.year),
                     ("month", self.month),
@@ -181,7 +181,6 @@ class ReferenceErrorInfo(object):
         return "Error: %(message)s (%(id)s)" % \
                 {'id': self.id, 'message': self.message}
 
-
 def arxiv2bib(id_list):
     """Returns a list of references, corresponding to elts of id_list"""
     d = arxiv2bib_dict(id_list)
@@ -194,7 +193,6 @@ def arxiv2bib(id_list):
 
     return l
 
-
 def arxiv_request(ids):
     """Sends a request to the arxiv API."""
     q = urlencode([
@@ -205,7 +203,6 @@ def arxiv_request(ids):
     # xml.read() returns bytes, but ElementTree.fromstring decodes
     # to unicode when needed (python2) or string (python3)
     return ElementTree.fromstring(xml.read())
-
 
 def arxiv2bib_dict(id_list):
     """Fetches citations for ids in id_list into a dictionary indexed by id"""
@@ -264,7 +261,6 @@ def get_arxiv_id(text):
     """
     format_id = re.compile('[\\d]+.[\\d]+')
     return format_id.findall(text)[0]
-
 
 class Cli(object):
     """Command line interface"""
@@ -377,7 +373,6 @@ class Cli(object):
           help="Display more error messages")
         return parser.parse_args(args)
 
-
 def main(args=None):
     """Run the command line interface"""
     cli = Cli(args)
@@ -390,7 +385,6 @@ def main(args=None):
     cli.print_output()
     cli.print_messages()
     return cli.code
-
 
 if __name__ == "__main__":
     sys.exit(main())

@@ -5,21 +5,6 @@ posted at arXiv.org in BibTeX format.
 Transform this::
 
     $ arxiv2bib 1001.1001
-
-Into this::
-
-    @article{1001.1001v1,
-    Author        = {Philip G. Judge},
-    Title         = {The chromosphere: gateway to the corona,
-      or the purgatory of solar physics?},
-    Eprint        = {1001.1001v1},
-    ArchivePrefix = {arXiv},
-    PrimaryClass  = {astro-ph.SR},
-    Abstract      = {I outline curious observations which I personally
-    find puzzling and deserving of attention.},
-    Year          = {2010},
-    Month         = {Jan}
-    }
 """
 
 import sys
@@ -36,10 +21,10 @@ setup(
     author = "Nathan Grigg",
     author_email = "nathan@nathangrigg.net",
     url = "http://nathangrigg.github.io/arxiv2bib",
-    py_modules = ["arxiv"],
+    py_modules = ["arxiv2bib"],
     keywords = ["arxiv", "bibtex", "latex", "citation"],
     entry_points = {
-        'console_scripts': ['arxiv = arxiv:main']
+        'console_scripts': ['arxiv2bib = arxiv2bib:main']
     },
     license = "BSD",
     classifiers = [
