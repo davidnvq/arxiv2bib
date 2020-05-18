@@ -22,6 +22,9 @@ a2b https://arxiv.org/abs/1911.11390
 
 # or the shorter
 a2b 1911.11390
+
+# multiple urls
+a2b 1911.11390 1911.11390
 ```
 
 Call as a module
