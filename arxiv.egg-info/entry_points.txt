@@ -1,3 +1,0 @@
-[console_scripts]
-arxiv2bib = arxiv2bib:main
-

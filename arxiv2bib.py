@@ -93,6 +93,7 @@ class Reference(object):
         self.bare_id = self.id[:self.id.rfind('v')]
         self.note = self._field_text('journal_ref', namespace=ARXIV)
         self.doi = self._field_text('doi', namespace=ARXIV)
+        self.cite_name = ''
 
     def _authors(self):
         """Extracts author names from xml."""
@@ -137,11 +138,12 @@ class Reference(object):
     def bibtex(self):
         """BibTex string of the reference."""
 
-        article = self.authors[0].split(' ')[-1]
-        article += str(self.year)
-        article += self.title.split(' ')[0]
-        article = article.replace(":", "").lower()
-        lines = ["@article{" + article]
+        cite_name = self.authors[0].split(' ')[-1]
+        cite_name += str(self.year)
+        cite_name += self.title.split(' ')[0]
+        cite_name = cite_name.replace(":", "")
+        self.cite_name = cite_name
+        lines = ["@article{" + cite_name]
 
         for k, v in [("author", " and ".join(self.authors)),
                     ("title", self.title),
@@ -159,8 +161,9 @@ class Reference(object):
                     ]:
             if len(v):
                 lines.append("%-13s = {%s}" % (k, v))
-
-        return ("," + os.linesep).join(lines) + os.linesep + "}"
+        cite_bib = ("," + os.linesep).join(lines) + os.linesep + "}"
+        
+        return cite_bib
 
 
 class ReferenceErrorInfo(object):
@@ -288,7 +291,6 @@ class Cli(object):
     def run(self):
         """Produce output and error messages"""
         try:
-            print("Run!!!!")
             bib = arxiv2bib(self.args.id)
         except HTTPError as error:
             if error.getcode() == 403:
@@ -321,7 +323,7 @@ class Cli(object):
     def print_output(self):
         if not self.output:
             return
-
+        
         output_string = os.linesep.join(self.output)
         try:
             print(output_string)

@@ -15,16 +15,16 @@ except ImportError:
  -> http://pypi.python.org/pypi/setuptools""")
 
 setup(
-    name = "arxiv",
+    name = "arxiv2bib",
     version = "1.0.8",
     description = "Get arXiv.org metadata in BibTeX format",
     author = "Nathan Grigg",
     author_email = "nathan@nathangrigg.net",
     url = "http://nathangrigg.github.io/arxiv2bib",
     py_modules = ["arxiv2bib"],
-    keywords = ["arxiv", "bibtex", "latex", "citation"],
+    keywords = ["arxiv2bib", "bibtex", "latex", "citation"],
     entry_points = {
-        'console_scripts': ['arxiv2bib = arxiv2bib:main']
+        'console_scripts': ['a2b = arxiv2bib:main']
     },
     license = "BSD",
     classifiers = [
